@@ -20,11 +20,13 @@ public class PpgCoreClient: NSObject {
     public init(endpoint: String = "https://api-core.pushpushgo.com/v1") {
         self.eventService = EventService(endpoint: endpoint)
     }
-
+  
+    @available(iOSApplicationExtension, unavailable)
     private func setBadge(num: Int) {
         return UIApplication.shared.applicationIconBadgeNumber = num;
     }
-    
+  
+    @available(iOSApplicationExtension, unavailable)
     private func getBadge() -> Int {
         return UIApplication.shared.applicationIconBadgeNumber
     }
@@ -69,23 +71,27 @@ public class PpgCoreClient: NSObject {
                 )
             ])
     }
-    
+  
+    @available(iOSApplicationExtension, unavailable)
     public func resetBadge() {
         PpgCoreLogger.info("Reset badge")
         return setBadge(num: -1);
     }
-    
+  
+    @available(iOSApplicationExtension, unavailable)
     public func incrementBadge() {
         PpgCoreLogger.info("Incrementing badge")
         return setBadge(num: getBadge() + 1)
     }
-    
+  
+    @available(iOSApplicationExtension, unavailable)
     public func decrementBadge() {
         PpgCoreLogger.info("Decrementing badge")
         return setBadge(num: getBadge() - 1)
     }
  
     /// Default notifications prompt
+    @available(iOSApplicationExtension, unavailable)
     public func registerForNotifications(handler: @escaping (_ result: SubscriptionActionResult) -> Void) {
         UNUserNotificationCenter
             .current()
@@ -121,6 +127,7 @@ public class PpgCoreClient: NSObject {
     }
     
     /// Trigger open default browser with provided URL
+    @available(iOSApplicationExtension, unavailable)
     private func openUrl(url: URL?) {
         if (url == nil) {
             PpgCoreLogger.info("No url provided")
@@ -131,6 +138,7 @@ public class PpgCoreClient: NSObject {
     }
     
     /// Methods handles any notifications response and send statistics events to server
+    @available(iOSApplicationExtension, unavailable)
     public func handleNotificationResponse(response: UNNotificationResponse, completionHandler: @escaping () -> Void) {
       switch(NotificationFactory.detectType(content: response.notification.request.content)) {
         case .data:

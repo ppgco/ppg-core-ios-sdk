@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-public class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
+open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
     let eventService: EventService
   
     var contentHandler: ((UNNotificationContent) -> Void)?
