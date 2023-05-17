@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum NotificationType {
+    case silent
+    case data
+    case unknown
+}
+
 protocol Notification {
     var foreignId: String? {get set}
     var contextId: UUID {get set}

@@ -25,7 +25,7 @@ public class LocalNotificationService {
     func showNotification(content: UNMutableNotificationContent) {
         var request: UNNotificationRequest
         
-        switch PpgCoreClient.detectType(content: content) {
+        switch NotificationFactory.detectType(content: content) {
         case .silent:
             let silentNotification = SilentNotification(content: content)
             request = UNNotificationRequest(

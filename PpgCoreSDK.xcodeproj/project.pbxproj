@@ -25,6 +25,8 @@
 		46CB7CA829D322E400D1E118 /* PpgCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CB7C9D29D322E400D1E118 /* PpgCoreSDK.framework */; };
 		46CB7CAD29D322E400D1E118 /* PpgCoreSDKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB7CAC29D322E400D1E118 /* PpgCoreSDKTest.swift */; };
 		46CB7CAE29D322E400D1E118 /* PpgCoreSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CB7CA029D322E400D1E118 /* PpgCoreSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46EF4EA42A15271000C5054A /* PpgCoreNotificationServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF4EA32A15271000C5054A /* PpgCoreNotificationServiceExtension.swift */; };
+		46EF4EA62A15288E00C5054A /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF4EA52A15288E00C5054A /* NotificationFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		46CB7CA129D322E400D1E118 /* PpgCoreSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PpgCoreSDK.docc; sourceTree = "<group>"; };
 		46CB7CA729D322E400D1E118 /* PpgCoreSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PpgCoreSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CB7CAC29D322E400D1E118 /* PpgCoreSDKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PpgCoreSDKTest.swift; sourceTree = "<group>"; };
+		46EF4EA32A15271000C5054A /* PpgCoreNotificationServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PpgCoreNotificationServiceExtension.swift; sourceTree = "<group>"; };
+		46EF4EA52A15288E00C5054A /* NotificationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 		465FEA8A29D58A3200C85F94 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				46EF4EA52A15288E00C5054A /* NotificationFactory.swift */,
 				465FEA9D29D58A6400C85F94 /* Notification.swift */,
 				465FEA9929D58A6400C85F94 /* NotificationClosed.swift */,
 				465FEA9829D58A6400C85F94 /* NotificationDelivered.swift */,
@@ -142,6 +147,7 @@
 			children = (
 				467C96FE29EE825200DC3C50 /* Utils */,
 				465FEA8C29D58A4400C85F94 /* PpgCoreClient.swift */,
+				46EF4EA32A15271000C5054A /* PpgCoreNotificationServiceExtension.swift */,
 				465FEA8A29D58A3200C85F94 /* Models */,
 				465FEA8929D58A2700C85F94 /* Extensions */,
 				465FEA8729D58A0B00C85F94 /* Services */,
@@ -277,7 +283,9 @@
 				465FEA8E29D58A4400C85F94 /* PpgCoreClient.swift in Sources */,
 				465FEAA029D58A6400C85F94 /* NotificationClosed.swift in Sources */,
 				465FEA9F29D58A6400C85F94 /* NotificationDelivered.swift in Sources */,
+				46EF4EA42A15271000C5054A /* PpgCoreNotificationServiceExtension.swift in Sources */,
 				465FEA9629D58A5700C85F94 /* TemporaryImage.swift in Sources */,
+				46EF4EA62A15288E00C5054A /* NotificationFactory.swift in Sources */,
 				467C96FD29EE823700DC3C50 /* PpgCoreLogger.swift in Sources */,
 				465FEAA429D58A6400C85F94 /* Notification.swift in Sources */,
 				465FEA9529D58A5700C85F94 /* UNNotificationAttachment.swift in Sources */,

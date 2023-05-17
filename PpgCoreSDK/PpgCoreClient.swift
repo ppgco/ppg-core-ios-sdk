@@ -9,12 +9,6 @@ import Foundation
 import UserNotifications
 import SwiftUI
 
-enum NotificationType {
-    case silent
-    case data
-    case unknown
-}
-
 public enum SubscriptionActionResult {
     case success
     case error(String)
@@ -23,30 +17,10 @@ public enum SubscriptionActionResult {
 public class PpgCoreClient: NSObject {
     let eventService: EventService
     
-    public init(endpoint: String) {
+    public init(endpoint: String = "https://api-core.pushpushgo.com/v1") {
         self.eventService = EventService(endpoint: endpoint)
     }
-    
-    static func detectType(userInfo: [AnyHashable : Any]) -> NotificationType {
-        // Check if contains our metadata
-        if let _ = userInfo["messageId"] as? String {
-            // If yes check if is marked as silent message
-            if let silent = userInfo["silent"] as? String? {
-                if (silent != nil) {
-                    return .silent
-                }
-            }
-            
-            return .data
-        }
-        
-        return .unknown
-    }
-    
-    static func detectType(content: UNNotificationContent) -> NotificationType {
-        return detectType(userInfo: content.userInfo)
-    }
-    
+
     private func setBadge(num: Int) {
         return UIApplication.shared.applicationIconBadgeNumber = num;
     }
@@ -111,22 +85,6 @@ public class PpgCoreClient: NSObject {
         return setBadge(num: getBadge() - 1)
     }
  
-    private func detectType(content: UNNotificationContent) -> NotificationType {
-        return PpgCoreClient.detectType(content: content);
-    }
-    
-    private func createSilent(userInfo: [AnyHashable : Any]) -> SilentNotification {
-        return SilentNotification(userInfo: userInfo);
-    }
-    
-    private func createSilent(content: UNNotificationContent) -> SilentNotification {
-        return SilentNotification(content: content)
-    }
-    
-    private func createData(content: UNNotificationContent) -> DataNotification {
-        return DataNotification(content: content)
-    }
-    
     /// Default notifications prompt
     public func registerForNotifications(handler: @escaping (_ result: SubscriptionActionResult) -> Void) {
         UNUserNotificationCenter
@@ -152,9 +110,9 @@ public class PpgCoreClient: NSObject {
     
     /// Methods should be used for handle notifications "swipe" to inform about "closed" events
     public func handleNotificationDismiss(notification: UNNotification) {
-        switch(detectType(content: notification.request.content)) {
+      switch(NotificationFactory.detectType(content: notification.request.content)) {
         case .data:
-            let dataNotification = createData(content: notification.request.content)
+          let dataNotification = NotificationFactory.createData(content: notification.request.content)
             eventService.send(closed: dataNotification.createClosedEvent())
             break;
         default:
@@ -174,9 +132,9 @@ public class PpgCoreClient: NSObject {
     
     /// Methods handles any notifications response and send statistics events to server
     public func handleNotificationResponse(response: UNNotificationResponse, completionHandler: @escaping () -> Void) {
-        switch(detectType(content: response.notification.request.content)) {
+      switch(NotificationFactory.detectType(content: response.notification.request.content)) {
         case .data:
-            let dataNotification = createData(content: response.notification.request.content)
+          let dataNotification = NotificationFactory.createData(content: response.notification.request.content)
             switch(response.actionIdentifier) {
             case "com.apple.UNNotificationDismissActionIdentifier":
                 eventService.send(closed: dataNotification.createClosedEvent()) {
@@ -217,10 +175,10 @@ public class PpgCoreClient: NSObject {
     /// By this method should only go "content-mutable" events ie. data events in ppg-core
     public func handleRemoteNotification(request: UNNotificationRequest, contentHandler: @escaping (UNNotificationContent) -> Void) -> UNMutableNotificationContent {
 
-        switch(detectType(content: request.content)) {
+      switch(NotificationFactory.detectType(content: request.content)) {
         case .data:
             PpgCoreLogger.info("Got data message from remote notifications")
-            let dataNotification = createData(content: request.content)
+            let dataNotification = NotificationFactory.createData(content: request.content)
             let newContent = dataNotification.toUNNotificationMutableContent()
             eventService.send(delivered: dataNotification.createDeliveredEvent())
 //            setActionsOnNotificationCenter(actions: dataNotification.getUNNotificationActions())
@@ -229,7 +187,7 @@ public class PpgCoreClient: NSObject {
             
         case .silent:
             PpgCoreLogger.info("Got silent message as normal remote notification");
-            let silentNotification = createSilent(content: request.content)
+            let silentNotification = NotificationFactory.createSilent(content: request.content)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
             let newContent = silentNotification.toUNNotificationMutableContent()
             return newContent
@@ -243,10 +201,10 @@ public class PpgCoreClient: NSObject {
     
     /// This method should handle only "content-available" messages ie. silent messages
     public func handleBackgroundRemoteNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        switch(PpgCoreClient.detectType(userInfo: userInfo)) {
+        switch(NotificationFactory.detectType(userInfo: userInfo)) {
         case .silent:
             PpgCoreLogger.info("Got background message as silent message try to register event");
-            let silentNotification = createSilent(userInfo: userInfo)
+            let silentNotification = NotificationFactory.createSilent(userInfo: userInfo)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
             completionHandler(.newData)
             return;
@@ -278,16 +236,16 @@ public class PpgCoreClient: NSObject {
     /// Local handling notification
     public func handleNotification(notification: UNNotification, completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        switch(detectType(content: notification.request.content)) {
+      switch(NotificationFactory.detectType(content: notification.request.content)) {
         case .data:
             PpgCoreLogger.info("Got data message from local notifications");
-            let dataNotification = createData(content: notification.request.content)
+            let dataNotification = NotificationFactory.createData(content: notification.request.content)
             eventService.send(delivered: dataNotification.createDeliveredEvent())
 //            setActionsOnNotificationCenter(actions: dataNotification.getUNNotificationActions())
             break;
         case .silent:
             PpgCoreLogger.info("Got silent message from local notifications");
-            let silentNotification = createSilent(content: notification.request.content)
+            let silentNotification = NotificationFactory.createSilent(content: notification.request.content)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
             return;
         case .unknown:
