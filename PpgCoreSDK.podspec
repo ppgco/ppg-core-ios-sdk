@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
     #
   
     spec.name         = "PpgCoreSDK"
-    spec.version      = "0.0.1"
+    spec.version      = "0.0.1-rc1"
     spec.summary      = "PushPushGo Core SDK"
   
     # This description is used to generate tags and improve search results.
@@ -37,7 +37,7 @@ Pod::Spec.new do |spec|
     #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
     #
   
-    spec.license      = { :type => "MIT", :file => "LICENSE" }
+    spec.license = { :type => "MIT", :file => "./LICENSE" }
   
   
     # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -77,7 +77,7 @@ Pod::Spec.new do |spec|
     #  Supports git, hg, bzr, svn and HTTP.
     #
   
-   spec.source = { :git => "git@github.com:ppgco/ppg-core-ios-sdk.git", :tag => spec.version }
+   spec.source = { :git => "https://github.com/ppgco/ppg-core-ios-sdk.git", :tag => spec.version }
   
   
     # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
