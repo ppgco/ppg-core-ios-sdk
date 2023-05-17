@@ -10,6 +10,9 @@ import UserNotifications
 
 public class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
     let eventService: EventService
+  
+    var contentHandler: ((UNNotificationContent) -> Void)?
+    var bestAttemptContent: UNMutableNotificationContent?
 
     public init(endpoint: String = "https://api-core.pushpushgo.com/v1") {
         self.eventService = EventService(endpoint: endpoint)
@@ -41,4 +44,16 @@ public class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension
             return request.content.mutableCopy() as! UNMutableNotificationContent;
         }
     }
+
+    public override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        bestAttemptContent = handleRemoteNotification(request: request, contentHandler: contentHandler)
+    }
+
+    public override func serviceExtensionTimeWillExpire() {
+        if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
+            contentHandler(bestAttemptContent)
+        }
+    }
+
 }
