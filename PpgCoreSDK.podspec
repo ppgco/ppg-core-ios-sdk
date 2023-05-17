@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
     #
   
     spec.name         = "PpgCoreSDK"
-    spec.version      = "0.0.2"
+    spec.version      = "0.0.3"
     spec.summary      = "PushPushGo Core SDK"
   
     # This description is used to generate tags and improve search results.
@@ -50,7 +50,7 @@ Pod::Spec.new do |spec|
     #  profile URL.
     #
   
-    spec.author             = { "" => "mateusz@pushpushgo.com" }
+    spec.author             = { "PushPushGo Core Developers" => "mateusz@pushpushgo.com" }
     # Or just: spec.author    = ""
     # spec.authors            = { "" => "mateusz@pushpushgo.com" }
     # spec.social_media_url   = "https://twitter.com/"
