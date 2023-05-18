@@ -9,20 +9,22 @@ import Foundation
 import UserNotifications
 
 open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
-    let eventService: EventService
+  
+    open func getEndpoint() -> String {
+      return "https://api-core.pushpushgo.com/v1"
+    }
+    
+    lazy var eventService: EventService = {
+      EventService(endpoint: getEndpoint())
+    }()
   
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
-
-    public init(endpoint: String = "https://api-core.pushpushgo.com/v1") {
-        self.eventService = EventService(endpoint: endpoint)
-    }
     
     /// This method should be handled in notification service extension
     /// By this method should only go "content-mutable" events ie. data events in ppg-core
     public func handleRemoteNotification(request: UNNotificationRequest, contentHandler: @escaping (UNNotificationContent) -> Void) -> UNMutableNotificationContent {
-
-      switch(NotificationFactory.detectType(content: request.content)) {
+        switch(NotificationFactory.detectType(content: request.content)) {
         case .data:
             PpgCoreLogger.info("Got data message from remote notifications")
             let dataNotification = NotificationFactory.createData(content: request.content)
@@ -45,12 +47,12 @@ open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
         }
     }
 
-    public override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    open override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = handleRemoteNotification(request: request, contentHandler: contentHandler)
     }
 
-    public override func serviceExtensionTimeWillExpire() {
+    open override func serviceExtensionTimeWillExpire() {
         if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
