@@ -1,6 +1,0 @@
-framework module PpgCoreSDK {
-  umbrella header "PpgCoreSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}

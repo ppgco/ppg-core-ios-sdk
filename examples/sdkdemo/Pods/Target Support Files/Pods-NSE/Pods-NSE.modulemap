@@ -1,6 +1,0 @@
-framework module Pods_NSE {
-  umbrella header "Pods-NSE-umbrella.h"
-
-  export *
-  module * { export * }
-}
