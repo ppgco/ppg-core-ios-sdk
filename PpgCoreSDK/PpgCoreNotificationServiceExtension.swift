@@ -1,5 +1,5 @@
 //
-//  NotificationFactory.swift
+//  PpgCoreNotificationServiceExtension.swift
 //  ppg-core-example
 //
 //  Created by Mateusz Worotyński on 30/03/2023.
@@ -10,13 +10,7 @@ import UserNotifications
 
 open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
   
-    open func getEndpoint() -> String {
-      return "https://api-core.pushpushgo.com/v1"
-    }
-    
-    lazy var eventService: EventService = {
-      EventService(endpoint: getEndpoint())
-    }()
+    let eventService: EventService = EventService(config: PpgCoreConfig())
   
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?

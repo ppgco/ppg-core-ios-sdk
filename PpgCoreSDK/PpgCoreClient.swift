@@ -1,6 +1,6 @@
 //
-//  NotificationFactory.swift
-//  ppg-core-example
+//  PpgCoreClient.swift
+//  PpgCoreSDK
 //
 //  Created by Mateusz Worotyński on 30/03/2023.
 //
@@ -15,12 +15,8 @@ public enum SubscriptionActionResult {
 }
 
 public class PpgCoreClient: NSObject {
-    let eventService: EventService
+    let eventService: EventService = EventService(config: PpgCoreConfig())
     
-    public init(endpoint: String = "https://api-core.pushpushgo.com/v1") {
-        self.eventService = EventService(endpoint: endpoint)
-    }
-  
     @available(iOSApplicationExtension, unavailable)
     private func setBadge(num: Int) {
         return UIApplication.shared.applicationIconBadgeNumber = num;

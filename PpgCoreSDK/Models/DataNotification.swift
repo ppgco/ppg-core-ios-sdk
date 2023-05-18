@@ -1,6 +1,6 @@
 //
 //  NotificationAction.swift
-//  ppg-core-example
+//  PpgCoreSDK
 //
 //  Created by Mateusz Worotyński on 30/03/2023.
 //

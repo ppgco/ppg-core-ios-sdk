@@ -1,6 +1,6 @@
 //
 //  EventService.swift
-//  ppg-core-example
+//  PpgCoreSDK
 //
 //  Created by Mateusz Worotyński on 29/03/2023.
 //
@@ -21,6 +21,10 @@ class EventService {
         self.endpoint = endpoint
     }
     
+    init(config: PpgCoreConfig) {
+        self.endpoint = config.endpoint
+    }
+  
     func getActionByType(type: EventType) -> String {
         switch type {
         case .clicked:

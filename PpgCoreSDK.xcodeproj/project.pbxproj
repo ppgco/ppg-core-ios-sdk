@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		464698DE2A16665700AD81FD /* PpgCoreConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464698DD2A16665700AD81FD /* PpgCoreConfig.swift */; };
 		465FEA8D29D58A4400C85F94 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465FEA8B29D58A4400C85F94 /* EventService.swift */; };
 		465FEA8E29D58A4400C85F94 /* PpgCoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465FEA8C29D58A4400C85F94 /* PpgCoreClient.swift */; };
 		465FEA9429D58A5700C85F94 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465FEA9129D58A5700C85F94 /* Data.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		464698DD2A16665700AD81FD /* PpgCoreConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PpgCoreConfig.swift; sourceTree = "<group>"; };
 		465FEA8B29D58A4400C85F94 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		465FEA8C29D58A4400C85F94 /* PpgCoreClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PpgCoreClient.swift; sourceTree = "<group>"; };
 		465FEA9129D58A5700C85F94 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				465FEAC929D5939400C85F94 /* LocalNotifcationService.swift */,
 				465FEA8B29D58A4400C85F94 /* EventService.swift */,
+				464698DD2A16665700AD81FD /* PpgCoreConfig.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				46EF4EA62A15288E00C5054A /* NotificationFactory.swift in Sources */,
 				467C96FD29EE823700DC3C50 /* PpgCoreLogger.swift in Sources */,
 				465FEAA429D58A6400C85F94 /* Notification.swift in Sources */,
+				464698DE2A16665700AD81FD /* PpgCoreConfig.swift in Sources */,
 				465FEA9529D58A5700C85F94 /* UNNotificationAttachment.swift in Sources */,
 				46CB7CA229D322E400D1E118 /* PpgCoreSDK.docc in Sources */,
 				465FEAA229D58A6400C85F94 /* SilentNotification.swift in Sources */,
