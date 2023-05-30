@@ -1,9 +1,9 @@
 # PushPushGo Core SDK for iOS
 ![GitHub tag (latest)](https://img.shields.io/github/v/tag/ppgco/ppg-core-ios-sdk?style=flat-square)
-![GitHub Workflow Status (main)](https://img.shields.io/github/actions/workflow/status/ppgco/ppg-core-ios-sdk/publish.yml?style=flat-square)
 ![Discord](https://img.shields.io/discord/1108358192339095662?color=%237289DA&label=Discord&style=flat-square)
+<!-- ![GitHub Workflow Status (main)](https://img.shields.io/github/actions/workflow/status/ppgco/ppg-core-ios-sdk/publish.yml?branch=main&style=flat-square) -->
 
-Packages are published on CocoaPods
+Packages are published on CocoaPods with same version as github releases tags
 
 ## Requirements:
 Access to Apple Developer Account.
