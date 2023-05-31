@@ -1,7 +1,6 @@
 # PushPushGo Core SDK for iOS
 ![GitHub tag (latest)](https://img.shields.io/github/v/tag/ppgco/ppg-core-ios-sdk?style=flat-square)
-![Discord](https://img.shields.io/discord/1108358192339095662?color=%237289DA&label=Discord&style=flat-square)
-<!-- ![GitHub Workflow Status (main)](https://img.shields.io/github/actions/workflow/status/ppgco/ppg-core-ios-sdk/publish.yml?branch=main&style=flat-square) -->
+[![Discord](https://img.shields.io/discord/1108358192339095662?color=%237289DA&label=Discord&style=flat-square)](https://discord.gg/NVpUWvreZa)
 
 Packages are published on CocoaPods with same version as github releases tags
 
@@ -257,3 +256,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 ## 3. Go to example [SenderSDK](https://github.com/ppgco/ppg-core-js-sdk/tree/main/examples/sender) docs 
  In examples please use prepared "providerConfig" and token returned from SDK to send notifications.
+
+# Support & production run
+If you need production credentials or just help with integration please visit us in [discord](https://discord.gg/NVpUWvreZa) or just mail to [support@pushpushgo.com](mailto:support@pushpushgo.com)
