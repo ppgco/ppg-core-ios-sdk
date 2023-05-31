@@ -124,7 +124,7 @@ class NotificationService: PpgCoreNotificationServiceExtension {
 1. Create AppDelegate.swift
 ```swift
 import Foundation
-import UIKit
+import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   
@@ -157,45 +157,45 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 2. Add method for willFinishLaunchingWithOptions
 ```swift
 func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        UNUserNotificationCenter.current().delegate = self
-        ppgCoreClient.initialize(actionLabels: ["Open", "Check more"])
-        return true
-    }
+    UNUserNotificationCenter.current().delegate = self
+    ppgCoreClient.initialize(actionLabels: ["Open", "Check more"])
+    return true
+}
 ```
 
 3. Add method for didFinishLaunchingWithOptions
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        ppgCoreClient.registerForNotifications(handler: {
-            result in
-            switch result {
-            case .success:
-                PpgCoreLogger.info("Granted")
-                break
-            case .error:
-                PpgCoreLogger.error("Denied")
-                break
-            }
-        })
+    ppgCoreClient.registerForNotifications(handler: {
+        result in
+        switch result {
+        case .success:
+            PpgCoreLogger.info("Granted")
+            break
+        case .error:
+            PpgCoreLogger.error("Denied")
+            break
+        }
+    })
 
-        ppgCoreClient.resetBadge()
-        return true
-    }
+    ppgCoreClient.resetBadge()
+    return true
+}
 ```
 
 4. Add method for didRegisterForRemoteNotificationsWithDeviceToken
 ```swift
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // TODO: Save this in your database!
-        PpgCoreLogger.info(Subscription(token: deviceToken).toJSONString())
-    }
+    // TODO: Save this in your database!
+    PpgCoreLogger.info(Subscription(token: deviceToken).toJSONString())
+}
 ```
 
 5. Add method for didReceiveRemoteNotification
 ```swift
 func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        ppgCoreClient.handleBackgroundRemoteNotification(userInfo: userInfo, completionHandler: completionHandler)
-    }
+    ppgCoreClient.handleBackgroundRemoteNotification(userInfo: userInfo, completionHandler: completionHandler)
+}
 ```
 
 ## 6. Add Extension in `AppDelegate.swift`
@@ -231,7 +231,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 # Sending notifications
 
 ## 1. Prepare certificates
- 1. Go to `https://developer.apple.com/account/resources/identifiers/list` and go to **Identifiers** section
+ 1. Go to [Apple Developer Portal - Identities](https://developer.apple.com/account/resources/identifiers/list) and go to **Identifiers** section
  2. Select from list your appBundleId like `com.example.your_project_name`
  3. Look for PushNotifications and click "**Configure**" button
  4. Select your __Certificate Singing Request__ file
