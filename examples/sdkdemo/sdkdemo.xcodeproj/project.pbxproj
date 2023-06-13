@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		35F69D93DF52ED4B6D8197CB /* Pods_sdkdemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531E12C10334326A2EB5EFC /* Pods_sdkdemo.framework */; };
+		460B697E2A38DCDC00FE1D07 /* PpgCore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 460B697D2A38DCDC00FE1D07 /* PpgCore.plist */; };
+		460B697F2A38DCDC00FE1D07 /* PpgCore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 460B697D2A38DCDC00FE1D07 /* PpgCore.plist */; };
+		460B69832A38DE3700FE1D07 /* sub.caf in Resources */ = {isa = PBXBuildFile; fileRef = 460B69822A38DE3700FE1D07 /* sub.caf */; };
+		460B69842A38DE3700FE1D07 /* sub.caf in Resources */ = {isa = PBXBuildFile; fileRef = 460B69822A38DE3700FE1D07 /* sub.caf */; };
 		464698AE2A162BA800AD81FD /* sdkdemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464698AD2A162BA800AD81FD /* sdkdemoApp.swift */; };
 		464698B02A162BA800AD81FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464698AF2A162BA800AD81FD /* ContentView.swift */; };
 		464698B22A162BA900AD81FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464698B12A162BA900AD81FD /* Assets.xcassets */; };
@@ -53,6 +57,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		460B697D2A38DCDC00FE1D07 /* PpgCore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PpgCore.plist; sourceTree = "<group>"; };
+		460B69822A38DE3700FE1D07 /* sub.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sub.caf; sourceTree = "<group>"; };
 		464698AA2A162BA800AD81FD /* sdkdemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdkdemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464698AD2A162BA800AD81FD /* sdkdemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sdkdemoApp.swift; sourceTree = "<group>"; };
 		464698AF2A162BA800AD81FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +120,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		460B69802A38DE1B00FE1D07 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				460B69812A38DE2600FE1D07 /* Sound */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		460B69812A38DE2600FE1D07 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				460B69822A38DE3700FE1D07 /* sub.caf */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		464698A12A162BA800AD81FD = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +159,7 @@
 		464698AC2A162BA800AD81FD /* sdkdemo */ = {
 			isa = PBXGroup;
 			children = (
+				460B69802A38DE1B00FE1D07 /* Library */,
 				464698C12A16325200AD81FD /* Info.plist */,
 				464698C02A1631ED00AD81FD /* sdkdemo.entitlements */,
 				464698AD2A162BA800AD81FD /* sdkdemoApp.swift */,
@@ -144,6 +167,7 @@
 				464698B12A162BA900AD81FD /* Assets.xcassets */,
 				464698B32A162BA900AD81FD /* Preview Content */,
 				464698BE2A16306600AD81FD /* AppDelegate.swift */,
+				460B697D2A38DCDC00FE1D07 /* PpgCore.plist */,
 			);
 			path = sdkdemo;
 			sourceTree = "<group>";
@@ -251,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				464698B52A162BA900AD81FD /* Preview Assets.xcassets in Resources */,
+				460B69832A38DE3700FE1D07 /* sub.caf in Resources */,
+				460B697E2A38DCDC00FE1D07 /* PpgCore.plist in Resources */,
 				464698B22A162BA900AD81FD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +285,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460B697F2A38DCDC00FE1D07 /* PpgCore.plist in Resources */,
+				460B69842A38DE3700FE1D07 /* sub.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@ import UserNotifications
 
 open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
   
-    let eventService: EventService = EventService(config: PpgCoreConfig())
+    let eventService: EventService = EventService(config: PpgCoreConfig.shared)
   
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?

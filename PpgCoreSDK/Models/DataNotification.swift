@@ -8,27 +8,10 @@
 import Foundation
 import UserNotifications
 
-struct NotificationAction: Codable {
-    let icon: String
-    let action: String
-    let title: String
-    let url: String
-
-    static func fromJson(json: Data) -> [NotificationAction] {
-        let decoder = JSONDecoder()
-
-        guard let deserialized = try? decoder.decode([NotificationAction].self, from: json) else {
-            fatalError("Failed to decode notification action from JSON")
-        }
-
-        return deserialized
-    }
-}
-
 struct DataNotification: Notification {
     var contextId: UUID
     var messageId: UUID
-    var sound: UNNotificationSound?
+    var channelName: String
     var foreignId: String?
     var actions: [NotificationAction] = []
     var title: String? = nil
@@ -46,7 +29,7 @@ struct DataNotification: Notification {
         self.title = content.title
         self.subtitle = content.subtitle
         self.body = content.body
-        self.sound = content.sound
+        self.channelName = content.userInfo["channelName"] as? String ?? "default"
         self.icon = content.userInfo["icon"] as? String
         self.image = content.userInfo["image"] as? String
         self.url = content.userInfo["url"] as? String
@@ -98,27 +81,14 @@ struct DataNotification: Notification {
         if (self.body != nil) {
             content.body = self.body!
         }
+               
+        if (self.actions.count > 0) {
+            content.userInfo["actions"] = self.serializeActions()
+        }
         
-
-        switch(self.actions.count) {
-        case 1:
-            content.categoryIdentifier = "PPG_NOTIFICATION_WITH_ACTION"
-            content.userInfo["actions"] = self.serializeActions()
-            break;
-        case 2:
-            content.categoryIdentifier = "PPG_NOTIFICATION_WITH_ACTIONS"
-            content.userInfo["actions"] = self.serializeActions()
-            break;
-        default:
-            content.categoryIdentifier = "PPG_NOTIFICATION"
-            break
-        }
-
-        if (self.sound != nil) {
-            content.sound = self.sound
-        } else {
-            content.sound = UNNotificationSound.default
-        }
+        let channel = PpgCoreConfig.shared.getChannel(notification: self)
+        content.categoryIdentifier = channel.name
+        content.sound = channel.sound
                 
         if let image = self.image {
             if let attachment = try? UNNotificationAttachment(url: image) {

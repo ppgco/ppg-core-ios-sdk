@@ -15,7 +15,7 @@ public enum SubscriptionActionResult {
 }
 
 public class PpgCoreClient: NSObject {
-    let eventService: EventService = EventService(config: PpgCoreConfig())
+    let eventService: EventService = EventService(config: PpgCoreConfig.shared)
     
     @available(iOSApplicationExtension, unavailable)
     private func setBadge(num: Int) {
@@ -26,46 +26,11 @@ public class PpgCoreClient: NSObject {
     private func getBadge() -> Int {
         return UIApplication.shared.applicationIconBadgeNumber
     }
-    
-    private func createCategoryAction(label: String, index: Int) -> UNNotificationAction {
-        return UNNotificationAction(
-            identifier: "action_\(index)",
-            title: label,
-            options: [.foreground]
-        )
-    }
 
-    public func initialize(actionLabels: [String]) {        
-        let firstAction = actionLabels.first ?? "Open"
-        let secondAction = actionLabels.last ?? "Show more"
-        UNUserNotificationCenter.current()
-            .setNotificationCategories([
-                UNNotificationCategory(
-                    identifier: "PPG_NOTIFICATION_WITH_ACTIONS",
-                    actions: [firstAction, secondAction].enumerated().map {( index, item ) in
-                        createCategoryAction(label: item, index: index)
-                    },
-                    intentIdentifiers: [],
-                    hiddenPreviewsBodyPlaceholder: "",
-                    options: [.customDismissAction]
-                ),
-                UNNotificationCategory(
-                    identifier: "PPG_NOTIFICATION_WITH_ACTION",
-                    actions: [firstAction].enumerated().map {( index, item ) in
-                        createCategoryAction(label: item, index: index)
-                    },
-                    intentIdentifiers: [],
-                    hiddenPreviewsBodyPlaceholder: "",
-                    options: [.customDismissAction]
-                ),
-                UNNotificationCategory(
-                    identifier: "PPG_NOTIFICATION",
-                    actions: [],
-                    intentIdentifiers: [],
-                    hiddenPreviewsBodyPlaceholder: "",
-                    options: [.customDismissAction]
-                )
-            ])
+    public func initialize(actionLabels: [String] = []) {
+        UNUserNotificationCenter
+          .current()
+          .setNotificationCategories(PpgCoreConfig.shared.getCategories(actionLabels: actionLabels))
     }
   
     @available(iOSApplicationExtension, unavailable)
@@ -185,7 +150,6 @@ public class PpgCoreClient: NSObject {
             let dataNotification = NotificationFactory.createData(content: request.content)
             let newContent = dataNotification.toUNNotificationMutableContent()
             eventService.send(delivered: dataNotification.createDeliveredEvent())
-//            setActionsOnNotificationCenter(actions: dataNotification.getUNNotificationActions())
             contentHandler(newContent);
             return newContent
             
@@ -214,7 +178,6 @@ public class PpgCoreClient: NSObject {
             return;
         case .data:
             PpgCoreLogger.info("Got background message as data message omit registering event");
-//            setActionsOnNotificationCenter(actions: self.getActionsFromJSON(jsonString: userInfo["actions"] as! String))
             completionHandler(.newData)
             return;
         case .unknown:
@@ -245,7 +208,6 @@ public class PpgCoreClient: NSObject {
             PpgCoreLogger.info("Got data message from local notifications");
             let dataNotification = NotificationFactory.createData(content: notification.request.content)
             eventService.send(delivered: dataNotification.createDeliveredEvent())
-//            setActionsOnNotificationCenter(actions: dataNotification.getUNNotificationActions())
             break;
         case .silent:
             PpgCoreLogger.info("Got silent message from local notifications");
@@ -262,34 +224,5 @@ public class PpgCoreClient: NSObject {
         } else {
             completionHandler([.alert, .sound])
         }
-    }
-    
-    /// Method prepared for dynamic actions, but due to iOS platform weak support not used for now
-    public func setActionsOnNotificationCenter(actions: [UNNotificationAction]) {
-        UNUserNotificationCenter
-            .current()
-            .setNotificationCategories([
-                UNNotificationCategory(
-                    identifier: "PPG_NOTIFICATION_WITH_ACTIONS",
-                    actions: actions,
-                    intentIdentifiers: [],
-                    hiddenPreviewsBodyPlaceholder: "",
-                    options: [.customDismissAction]
-                ),
-                UNNotificationCategory(
-                    identifier: "PPG_NOTIFICATION_WITH_ACTION",
-                    actions: actions,
-                    intentIdentifiers: [],
-                    hiddenPreviewsBodyPlaceholder: "",
-                    options: [.customDismissAction]
-                ),
-                UNNotificationCategory(
-                    identifier: "PPG_NOTIFICATION",
-                    actions: [],
-                    intentIdentifiers: [],
-                    hiddenPreviewsBodyPlaceholder: "",
-                    options: [.customDismissAction]
-                )
-            ])
     }
 }

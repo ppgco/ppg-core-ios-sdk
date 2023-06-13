@@ -68,16 +68,16 @@ Open XCode Workspace instead of Project
 
 Add to your target our library:
 
-```swift
+```sh
 target 'your_project_name' do
   use_frameworks!
-  pod 'PpgCoreSDK', '~> 0.0.8'
+  pod 'PpgCoreSDK', '~> 0.0.9'
 end
 ```
 
 Then install pods and open xcode with workspace env
 
-```bash
+```sh
 $ pod install
 $ xed your_project_name.xcworkspace
 ```
@@ -96,14 +96,14 @@ $ xed your_project_name.xcworkspace
 3. Finish process and on prompt about __Activate “NSE” scheme?__ click **Cancel**
 4. Add to previously used name **NSE** 
 target to `Podfile`:
-```
+```sh
 target 'NSE' do
   use_frameworks!
-  pod 'PpgCoreSDK', '~> 0.0.8'
+  pod 'PpgCoreSDK', '~> 0.0.9'
 end
 ```
 5. Install pods
-```bash
+```sh
 $ pod install
 ```
 
@@ -221,10 +221,43 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 ```
 
-7. (Optional) add to Info.plist file in case if you want to override endpoint (development, self-hosted instance) add to `<dict>`
+7. (optional) If you need to overwrite endpoint or prepare channels (with customized actions) create PpgCore.plist
+
+> Important: Select target for your **app and notification service extension**!
+
 ```xml
-    <key>PpgCoreSDKEndpoint</key>
-    <string>https://api-core.pushpushgo.com/v1</string>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PpgCoreSDKEndpoint</key>
+	<string>https://ppg-core.master1.qappg.co/v1</string>
+	<key>PpgCoreChannels</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>testing_channel</string>
+			<key>sound</key>
+			<string>Submarine.aiff</string>
+			<key>actions</key>
+			<array>
+				<string>Reply</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>testing_channel_nowy</string>
+			<key>sound</key>
+			<string>sub.caf</string>
+			<key>actions</key>
+			<array>
+				<string>Open</string>
+				<string>Show more</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
 ```
 
 # Sending notifications
@@ -239,7 +272,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 ## 2. Prepare configuration
  1. Wrap exported certficates with Base64 with command
- ```bash
+ ```sh
  $ cat Certificate.p12 | base64
  ```
  2. Prepare JSON with provider configuration
