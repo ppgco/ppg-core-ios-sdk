@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>PpgCoreSDKEndpoint</key>
-	<string>https://ppg-core.master1.qappg.co/v1</string>
+	<string>https://api-core.pushpushgo.com/v1</string>
 	<key>PpgCoreChannels</key>
 	<array>
 		<dict>
