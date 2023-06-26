@@ -9,5 +9,7 @@ import UserNotifications
 import PpgCoreSDK
 
 class NotificationService: PpgCoreNotificationServiceExtension {
-
+  override func onExternalData(data: String) {
+    PpgCoreLogger.error("NSE RECEIVED EXTERNAL DATA" + data)
+  }
 }

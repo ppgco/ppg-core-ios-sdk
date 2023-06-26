@@ -37,14 +37,14 @@ class EventService {
     }
     
     func internalSend(data: Data, contextId: String, type: EventType, completionHandler: @escaping () -> Void) {
-        var request = URLRequest(
+        var request: URLRequest = URLRequest(
             url: URL(string: "\(endpoint)/context/\(contextId.lowercased())/events/\(getActionByType(type: type))")!
         )
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = data
-
+      
         URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
                 PpgCoreLogger.info(error?.localizedDescription ?? "Unknown error")

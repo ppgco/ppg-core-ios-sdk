@@ -24,6 +24,7 @@ open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
             let dataNotification = NotificationFactory.createData(content: request.content)
             let newContent = dataNotification.toUNNotificationMutableContent()
             eventService.send(delivered: dataNotification.createDeliveredEvent())
+            onExternalData(data: dataNotification.externalData)
             contentHandler(newContent);
             return newContent
             
@@ -31,6 +32,7 @@ open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
             PpgCoreLogger.info("Got silent message as normal remote notification");
             let silentNotification = NotificationFactory.createSilent(content: request.content)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
+            onExternalData(data: silentNotification.externalData)
             let newContent = silentNotification.toUNNotificationMutableContent()
             return newContent
             
@@ -50,6 +52,10 @@ open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
         if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
+    }
+  
+    open func onExternalData(data: String) -> Void {
+      
     }
 
 }
