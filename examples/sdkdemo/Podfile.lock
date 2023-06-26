@@ -2,15 +2,15 @@ PODS:
   - PpgCoreSDK (0.0.11)
 
 DEPENDENCIES:
-  - PpgCoreSDK (from `/Users/worotyns/code/ppg/ppg-core-ios-sdk`)
+  - PpgCoreSDK (~> 0.0.11)
 
-EXTERNAL SOURCES:
-  PpgCoreSDK:
-    :path: "/Users/worotyns/code/ppg/ppg-core-ios-sdk"
+SPEC REPOS:
+  trunk:
+    - PpgCoreSDK
 
 SPEC CHECKSUMS:
-  PpgCoreSDK: 76c44cf7ddd3afbce74183ed44e9232557011c24
+  PpgCoreSDK: 7733c4e4675d137d74ad72fda42cf8084a4555a0
 
-PODFILE CHECKSUM: 3745efa55adb0c105591c0ea1c08e0ed3bfcb744
+PODFILE CHECKSUM: 984c43c4ce1e6cbd75494cd2a21ed9140b20690c
 
 COCOAPODS: 1.12.1
