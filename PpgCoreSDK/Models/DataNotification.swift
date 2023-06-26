@@ -12,6 +12,7 @@ struct DataNotification: Notification {
     var contextId: UUID
     var messageId: UUID
     var channelName: String
+    var externalData: String
     var foreignId: String?
     var actions: [NotificationAction] = []
     var title: String? = nil
@@ -25,7 +26,8 @@ struct DataNotification: Notification {
         self.contextId = UUID(uuidString: (content.userInfo["contextId"] as? String)!)!
         self.messageId = UUID(uuidString: (content.userInfo["messageId"] as? String)!)!
         self.foreignId = content.userInfo["foreignId"] as? String
-        
+        self.externalData = content.userInfo["externalData"] as? String ?? ""
+
         self.title = content.title
         self.subtitle = content.subtitle
         self.body = content.body
@@ -65,6 +67,7 @@ struct DataNotification: Notification {
     func toUNNotificationMutableContent() -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         
+        content.userInfo["externalData"] = self.externalData
         content.userInfo["messageId"] = self.messageId.uuidString
         content.userInfo["contextId"] = self.contextId.uuidString
         content.userInfo["foreignId"] = self.foreignId

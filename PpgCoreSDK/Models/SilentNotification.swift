@@ -12,17 +12,21 @@ struct SilentNotification: Notification {
     var contextId: UUID
     var messageId: UUID
     var foreignId: String?
+    var externalData: String
     
     init(userInfo: [AnyHashable : Any]) {
         self.contextId = UUID(uuidString: (userInfo["contextId"] as? String)!)!
         self.messageId = UUID(uuidString: (userInfo["messageId"] as? String)!)!
         self.foreignId = userInfo["foreignId"] as? String
+        self.externalData = userInfo["externalData"] as? String ?? ""
+
     }
     
     init(content: UNNotificationContent) {
         self.contextId = UUID(uuidString: (content.userInfo["contextId"] as? String)!)!
         self.messageId = UUID(uuidString: (content.userInfo["messageId"] as? String)!)!
         self.foreignId = content.userInfo["foreignId"] as? String
+        self.externalData = content.userInfo["externalData"] as? String ?? ""
     }
     
     func toUNLocalNotificationMutableContent() -> UNMutableNotificationContent {
@@ -33,6 +37,7 @@ struct SilentNotification: Notification {
     
     func toUNNotificationMutableContent() -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
+        content.userInfo["externalData"] = self.externalData
         content.userInfo["messageId"] = self.messageId.uuidString
         content.userInfo["contextId"] = self.contextId.uuidString
         content.userInfo["foreignId"] = self.foreignId

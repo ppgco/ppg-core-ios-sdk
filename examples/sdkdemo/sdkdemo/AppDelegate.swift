@@ -14,9 +14,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   
     let ppgCoreClient: PpgCoreClient = PpgCoreClient()
 
+    /// Handles data "externalData" from notification (silent, data)
+    func onPpgCoreExternalData(data: String) -> Void {
+      PpgCoreLogger.info("EXTERNAL DATA RECEIVED: " + data);
+    }
+    
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-        ppgCoreClient.initialize(actionLabels: ["Open", "Check more"])
+        ppgCoreClient.initialize(actionLabels: ["Open", "Check more"], onExternalData: self.onPpgCoreExternalData)
         return true
     }
     
@@ -36,7 +41,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         ppgCoreClient.resetBadge()
         return true
     }
-    
+  
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // TODO: Save this in your database!
         PpgCoreLogger.info(Subscription(token: deviceToken).toJSONString())

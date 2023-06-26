@@ -16,6 +16,9 @@ public enum SubscriptionActionResult {
 
 public class PpgCoreClient: NSObject {
     let eventService: EventService = EventService(config: PpgCoreConfig.shared)
+    var onExternalData: (_ data: String) -> Void = {
+        result in
+    }
     
     @available(iOSApplicationExtension, unavailable)
     private func setBadge(num: Int) {
@@ -28,6 +31,13 @@ public class PpgCoreClient: NSObject {
     }
 
     public func initialize(actionLabels: [String] = []) {
+        UNUserNotificationCenter
+          .current()
+          .setNotificationCategories(PpgCoreConfig.shared.getCategories(actionLabels: actionLabels))
+    }
+    
+    public func initialize(actionLabels: [String] = [], onExternalData: @escaping (_ data: String) -> Void) {
+        self.onExternalData = onExternalData
         UNUserNotificationCenter
           .current()
           .setNotificationCategories(PpgCoreConfig.shared.getCategories(actionLabels: actionLabels))
@@ -143,13 +153,13 @@ public class PpgCoreClient: NSObject {
     /// This method should be handled in notification service extension
     /// By this method should only go "content-mutable" events ie. data events in ppg-core
     public func handleRemoteNotification(request: UNNotificationRequest, contentHandler: @escaping (UNNotificationContent) -> Void) -> UNMutableNotificationContent {
-
       switch(NotificationFactory.detectType(content: request.content)) {
         case .data:
             PpgCoreLogger.info("Got data message from remote notifications")
             let dataNotification = NotificationFactory.createData(content: request.content)
             let newContent = dataNotification.toUNNotificationMutableContent()
             eventService.send(delivered: dataNotification.createDeliveredEvent())
+            onExternalData(dataNotification.externalData)
             contentHandler(newContent);
             return newContent
             
@@ -157,6 +167,7 @@ public class PpgCoreClient: NSObject {
             PpgCoreLogger.info("Got silent message as normal remote notification");
             let silentNotification = NotificationFactory.createSilent(content: request.content)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
+            onExternalData(silentNotification.externalData)
             let newContent = silentNotification.toUNNotificationMutableContent()
             return newContent
             
@@ -174,6 +185,7 @@ public class PpgCoreClient: NSObject {
             PpgCoreLogger.info("Got background message as silent message try to register event");
             let silentNotification = NotificationFactory.createSilent(userInfo: userInfo)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
+            onExternalData(silentNotification.externalData)
             completionHandler(.newData)
             return;
         case .data:
@@ -202,16 +214,17 @@ public class PpgCoreClient: NSObject {
     
     /// Local handling notification
     public func handleNotification(notification: UNNotification, completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
       switch(NotificationFactory.detectType(content: notification.request.content)) {
         case .data:
             PpgCoreLogger.info("Got data message from local notifications");
             let dataNotification = NotificationFactory.createData(content: notification.request.content)
+            onExternalData(dataNotification.externalData)
             eventService.send(delivered: dataNotification.createDeliveredEvent())
             break;
         case .silent:
             PpgCoreLogger.info("Got silent message from local notifications");
             let silentNotification = NotificationFactory.createSilent(content: notification.request.content)
+            onExternalData(silentNotification.externalData)
             eventService.send(delivered: silentNotification.createDeliveredEvent())
             return;
         case .unknown:
