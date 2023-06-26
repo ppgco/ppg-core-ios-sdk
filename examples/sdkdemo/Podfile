@@ -2,10 +2,10 @@ platform :ios, '14.0'
 
 target 'sdkdemo' do
   use_frameworks!
-  pod 'PpgCoreSDK', '~> 0.0.9'
+  pod 'PpgCoreSDK', '~> 0.0.10'
 end
 
 target 'NSE' do
   use_frameworks!
-  pod 'PpgCoreSDK', '~> 0.0.9'
+  pod 'PpgCoreSDK', '~> 0.0.10'
 end

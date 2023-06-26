@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
     #
   
     spec.name         = "PpgCoreSDK"
-    spec.version      = "0.0.9"
+    spec.version      = "0.0.10"
     spec.summary      = "PushPushGo Core SDK"
   
     # This description is used to generate tags and improve search results.

@@ -71,7 +71,7 @@ Add to your target our library:
 ```sh
 target 'your_project_name' do
   use_frameworks!
-  pod 'PpgCoreSDK', '~> 0.0.9'
+  pod 'PpgCoreSDK', '~> 0.0.10'
 end
 ```
 
@@ -99,7 +99,7 @@ target to `Podfile`:
 ```sh
 target 'NSE' do
   use_frameworks!
-  pod 'PpgCoreSDK', '~> 0.0.9'
+  pod 'PpgCoreSDK', '~> 0.0.10'
 end
 ```
 5. Install pods

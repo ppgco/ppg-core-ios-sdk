@@ -1,8 +1,8 @@
 PODS:
-  - PpgCoreSDK (0.0.9)
+  - PpgCoreSDK (0.0.10)
 
 DEPENDENCIES:
-  - PpgCoreSDK (~> 0.0.9)
+  - PpgCoreSDK (~> 0.0.10)
 
 SPEC REPOS:
   trunk:
