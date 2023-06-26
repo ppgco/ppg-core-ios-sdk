@@ -64,9 +64,10 @@ struct DataNotification: Notification {
         return actions
     }
     
-    func toUNNotificationMutableContent() -> UNMutableNotificationContent {
+    func toUNNotificationMutableContent(markAsWrapped: Bool = false) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        
+      
+        content.userInfo["_wrappedByNSE"] = markAsWrapped ? "1" : nil
         content.userInfo["externalData"] = self.externalData
         content.userInfo["messageId"] = self.messageId.uuidString
         content.userInfo["contextId"] = self.contextId.uuidString

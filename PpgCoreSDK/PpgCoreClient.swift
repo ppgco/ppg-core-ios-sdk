@@ -218,6 +218,12 @@ public class PpgCoreClient: NSObject {
         case .data:
             PpgCoreLogger.info("Got data message from local notifications");
             let dataNotification = NotificationFactory.createData(content: notification.request.content)
+          
+            if (notification.request.content.userInfo["_wrappedByNSE"] != nil) {
+               PpgCoreLogger.info("Omit, registering delivered event, wrapped by notification wrapped in NSE")
+               break;
+            }
+          
             onExternalData(dataNotification.externalData)
             eventService.send(delivered: dataNotification.createDeliveredEvent())
             break;

@@ -22,7 +22,7 @@ open class PpgCoreNotificationServiceExtension: UNNotificationServiceExtension {
         case .data:
             PpgCoreLogger.info("Got data message from remote notifications")
             let dataNotification = NotificationFactory.createData(content: request.content)
-            let newContent = dataNotification.toUNNotificationMutableContent()
+            let newContent = dataNotification.toUNNotificationMutableContent(markAsWrapped: true)
             eventService.send(delivered: dataNotification.createDeliveredEvent())
             onExternalData(data: dataNotification.externalData)
             contentHandler(newContent);
