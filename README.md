@@ -115,7 +115,9 @@ import UserNotifications
 import PpgCoreSDK
 
 class NotificationService: PpgCoreNotificationServiceExtension {
-  
+  override func onExternalData(data: String) {
+    PpgCoreLogger.info("NSE RECEIVED EXTERNAL DATA" + data)
+  }
 }
 ```
 
@@ -155,9 +157,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 2. Add method for willFinishLaunchingWithOptions
 ```swift
+
+/// Handles data "externalData" from notification (silent, data)
+func onPpgCoreExternalData(data: String) -> Void {
+    PpgCoreLogger.info("EXTERNAL DATA RECEIVED: " + data);
+}
+
 func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     UNUserNotificationCenter.current().delegate = self
-    ppgCoreClient.initialize(actionLabels: ["Open", "Check more"])
+    ppgCoreClient.initialize(actionLabels: ["Open", "Check more"], onExternalData: self.onPpgCoreExternalData)
     return true
 }
 ```
