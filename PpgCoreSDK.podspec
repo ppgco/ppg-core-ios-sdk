@@ -17,14 +17,14 @@ Pod::Spec.new do |spec|
   
     spec.name         = "PpgCoreSDK"
     spec.version      = "0.0.11"
-    spec.summary      = "PushPushGo Core SDK"
+    spec.summary      = "CORE by PushPushGo SDK"
   
     # This description is used to generate tags and improve search results.
     #   * Think: What does it do? Why did you write it? What is the focus?
     #   * Try to keep it short, snappy and to the point.
     #   * Write the description between the DESC delimiters below.
     #   * Finally, don't worry about the indent, CocoaPods strips it!
-    spec.description  = "PushPushGo Core SDK for iOS platform"
+    spec.description  = "CORE by PushPushGo SDK for iOS platform"
   
     spec.homepage     = "https://github.com/ppgco/ppg-core-ios-sdk"
     # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -50,7 +50,7 @@ Pod::Spec.new do |spec|
     #  profile URL.
     #
   
-    spec.author             = { "PushPushGo Core Developers" => "mateusz@pushpushgo.com" }
+    spec.author             = { "CORE by PushPushGo Developers" => "support@pushpushgo.com" }
     # Or just: spec.author    = ""
     # spec.authors            = { "" => "mateusz@pushpushgo.com" }
     # spec.social_media_url   = "https://twitter.com/"
