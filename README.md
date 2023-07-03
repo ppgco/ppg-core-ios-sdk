@@ -10,7 +10,7 @@
 Send your transactional and bulk messages, and we'll take care of the rest.
 
 #### What we offer:
- - Ready SDK for client/server integration - we have an SDK for the most popular platforms.
+ - Ready SDK for client/server integration - we have SDK for the most popular platforms.
  - Mobile and WebPush implementation (APNS, FCM, VAPID).
  - Transactional and bulk push notifications through API.
  - Hassle-free usage. Our servers handle traffic peaks and store images.
@@ -50,7 +50,7 @@ When you try to send message you will prepare:
 
  - **Context** - your message - this context can be reused to send bulk messages or just used once when you send transactional message then is context is **temporary**
 
-When you send message you will _authorize_ via **bucket** data, prepare message with **context** and send to **recipients** then can be bulked up to 1000 per request.
+When you send message you will _authorize_ via **bucket** data, prepare message with **context** and send to **recipients** that can be bulked up to 1000 per request.
 
 On the server side:
  - We validate and prepare the message body.
@@ -68,7 +68,7 @@ On the server side:
 
 ![image](https://i.ibb.co/tst39rS/architecture.png "Architecture")
 
-When message is delivered to the device and interacts with user, we collect events and pass them to our API, collect and resend to your webhook endpoint.
+When a message is delivered to the device and interacts with the user, we collect events and pass them to our API. The collected events are resent to your webhook endpoint.
 
 #### Webhooks events
 During the journey of push we will trigger webhook events.
@@ -86,7 +86,7 @@ During the journey of push we will trigger webhook events.
 
 <small><sup>1</sup> - webpush doesn't support silent messages due to Push API implementation</small>
 
-If `foreignId` field was passed with `receiver` then it will also included in event in message.
+If `foreignId` field was passed with `receiver` then it will also be included in event in message.
 
 Example events package:
 
@@ -382,4 +382,4 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 # Support & production run
 All API keys available in this documentation allows you to test service with very low rate-limits.
-If you need production credentials or just help with integration please visit us in [discord](https://discord.gg/NVpUWvreZa) or just mail to [support@pushpushgo.com](mailto:support@pushpushgo.com)
+If you need production credentials or just help with integration please visit us in [discord](https://discord.gg/NVpUWvreZa) or just mail to [support+core@pushpushgo.com](mailto:support+core@pushpushgo.com)
