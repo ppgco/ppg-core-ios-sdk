@@ -3,40 +3,66 @@
 ![GitHub tag (latest)](https://img.shields.io/github/v/tag/ppgco/ppg-core-ios-sdk?style=flat-square)
 [![Discord](https://img.shields.io/discord/1108358192339095662?color=%237289DA&label=Discord&style=flat-square)](https://discord.gg/NVpUWvreZa)
 
-<small>Packages are published on CocoaPods with same version as github releases tags</small>
-
 ## Product Info
 
-**CORE** _by PushPushGo_ is a building blocks for push notifications:
- - sender for push notifications - we handle batch requests, aggregate feedback events and inform your webhook
- - images storage & traffic - we handle, crop and serve your push images
- - fast implementation - we cover all platforms with push notifications support
- - **you own your database and credentials** - no vendor lock - we provide infrastructure, sdk & support
- - simple API - we provide one unified API for all providers
+**CORE** _by PushPushGo_ is a hassle-free building block for all your web and mobile push needs.
 
-## Client side SDK - supported platforms / providers
+Send your transactional and bulk messages, and we'll take care of the rest.
 
-| Platform | Provider | SDK        |
-|----------|----------|------------|
-| Android / Huawei  | FCM / HMS      | [CORE Android SDK](https://github.com/ppgco/ppg-core-android-sdk) |
-| iOS | APNS      | [CORE iOS SDK](https://github.com/ppgco/ppg-core-ios-sdk) |
-| Flutter | FCM / HMS / APNS      | [CORE Flutter SDK](https://github.com/ppgco/ppg-core-flutter-sdk) |
-| Web | Vapid (WebPush)     | [CORE JS SDK](https://github.com/ppgco/ppg-core-js-sdk) |
+#### What we offer:
+ - Ready SDK for client/server integration - we have an SDK for the most popular platforms.
+ - Mobile and WebPush implementation (APNS, FCM, VAPID).
+ - Transactional and bulk push notifications through API.
+ - Hassle-free usage. Our servers handle traffic peaks and store images.
+ - Event aggregation in bulk sent to your webhook for easy analysis or running your business logic.
+ - GDPR-ready solution protecting private data in accordance with EU regulations.
+ - No vendor lock-in - build and own your subscriber base (stateless solution).
 
-## Server side SDK (sending notifications)
-| Platform | SDK      |
-|----------|----------|
-| JavaScript / TypeScript  | [CORE JS SDK](https://github.com/ppgco/ppg-core-js-sdk) | 
-| .NET  | [WIP - ask](https://discord.gg/NVpUWvreZa) | 
-| Java  | [WIP - ask](https://discord.gg/NVpUWvreZa) | 
+#### What you get:
+ - Cost-effective solution: pay for sent pushes, not for infrastructure, traffic, and storage.
+ - Save time and effort on developing the sender and infrastructure.
+ - Simple API interface for all channels with bulk support.
+ - Support on our [Discord Server](https://discord.gg/NVpUWvreZa).
+ - You can implement notification features your way.
 
-Join our [Discord](https://discord.gg/NVpUWvreZa) to get support, your api key, talk or just keep an eye on it.
-
-<sub>**CORE** _by PushPushGo_ is not the same as **PushPushGo** product - if you are looking for [PushPushGo - Push Notifications Management Platform](https://pushpushgo.com)</sub>
+#### Try it if:
+ - You want to control the flow in your transactional messages and add a push notification channel.
+ - You're looking for an easy push notifications tool for your organization, whether it's finance, e-commerce, online publishing, or any other sector.
+ - You work in a software house and build solutions for your clients.
+ - You want a hassle-free solution to focus on other tasks at hand.
+ - You want to implement an on-premise solution for sending notifications.
+ - You have issues with an in-house solution.
+ - You're looking for a reliable provider and cooperation based on your needs.
 
 ## How it works
 
-When you send request to our API to send message, we prepare images and then connect to different providers. 
+When client register for notifications you will get object with:
+ - Credentials
+ - Token/endpoint
+ - Type of provider
+ - Identifier of provider
+
+We call this **Recipient** - it's your subscription data, store it in your database.
+
+When you try to send message you will prepare:
+
+ - **Bucket** - your temporary credentials bucket - this bucket can be reused any time, or recreated when credentials changed,
+
+ - **Context** - your message - this context can be reused to send bulk messages or just used once when you send transactional message then is context is **temporary**
+
+When you send message you will _authorize_ via **bucket** data, prepare message with **context** and send to **recipients** then can be bulked up to 1000 per request.
+
+On the server side:
+ - We validate and prepare the message body.
+ - Then, we upload and resize images to our CDN.
+ - Next, we connect and send to different providers.
+
+On the client side:
+ - Get notifications via our SDK in your App/Website.
+ - When interacting with a notification, we collect events with our API.
+
+On the server side:
+ - We aggregate events and deliver them in bulk to your webhook endpoint.
 
 ### Architecture
 
@@ -78,6 +104,32 @@ Example events package:
     ]
 }
 ```
+
+## Pricing
+
+We charge $0.50 USD for every 1000 sent notifications.
+
+## Support & Sales
+
+Join our [Discord](https://discord.gg/NVpUWvreZa) to get support, your api key, talk or just keep an eye on it.
+
+<sub>**CORE** _by PushPushGo_ is not the same as our main **PushPushGo** product - are you looking for [PushPushGo - Push Notifications Management Platform?](https://pushpushgo.com)</sub>
+
+## Client side SDK - supported platforms / providers
+
+| Platform | Provider | SDK        |
+|----------|----------|------------|
+| Android / Huawei  | FCM / HMS      | [CORE Android SDK](https://github.com/ppgco/ppg-core-android-sdk) |
+| iOS | APNS      | [CORE iOS SDK](https://github.com/ppgco/ppg-core-ios-sdk) |
+| Flutter | FCM / HMS / APNS      | [CORE Flutter SDK](https://github.com/ppgco/ppg-core-flutter-sdk) |
+| Web | Vapid (WebPush)     | [CORE JS SDK](https://github.com/ppgco/ppg-core-js-sdk) |
+
+## Server side SDK (sending notifications)
+| Platform | SDK      |
+|----------|----------|
+| JavaScript / TypeScript  | [CORE JS SDK](https://github.com/ppgco/ppg-core-js-sdk) | 
+| .NET  | [WIP - ask](https://discord.gg/NVpUWvreZa) | 
+| Java  | [WIP - ask](https://discord.gg/NVpUWvreZa) | 
 
 # SDK Integration instructions
 
