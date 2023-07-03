@@ -111,7 +111,7 @@ We charge $0.50 USD for every 1000 sent notifications.
 
 ## Support & Sales
 
-Join our [Discord](https://discord.gg/NVpUWvreZa) to get support, your api key, talk or just keep an eye on it.
+Join our [Discord](https://discord.gg/NVpUWvreZa) for docs, support, talk or just to keep in touch.
 
 <sub>**CORE** _by PushPushGo_ is not the same as our main **PushPushGo** product - are you looking for [PushPushGo - Push Notifications Management Platform?](https://pushpushgo.com)</sub>
 
