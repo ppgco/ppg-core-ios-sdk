@@ -109,6 +109,10 @@ Example events package:
 
 We charge $0.50 USD for every 1000 sent notifications.
 
+## Open API Specification
+
+Please visit our [Swagger](https://ppgco.github.io/ppg-core-open-api/#/)
+
 ## Support & Sales
 
 Join our [Discord](https://discord.gg/NVpUWvreZa) for docs, support, talk or just to keep in touch.
